@@ -1,0 +1,71 @@
+.header {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  background-color: rgba(53, 182, 221, 0.511);
+  box-shadow: 0px 4px 5px hsla(210, 75%, 51%, 0.397);
+  height: 59px;
+}
+
+.title {
+  position: absolute;
+  left: 60px;
+  font-size: 25px;
+  font-weight: 400;
+  top: 11px;
+  border-radius: 10px;
+  padding: 5px 10px 5px 10px;
+
+  font-family: "思源黑体", "Source Han Sans CN", "Noto Sans SC", sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  /* 添加渐变色文字效果 */
+  background: linear-gradient(45deg, #2196f3, #00bcd4);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.titleIcon {
+  position: absolute;
+  left: 9px;
+  top: 7px;
+  font-size: 2.7rem;
+}
+
+nav {
+  position: absolute;
+  left: 500px;
+  width: 300px;
+  display: flex;
+  justify-content: center;
+}
+
+.routeIcon {
+  margin-top: 21px;
+  font-size: 1.3rem;
+  margin-left: 35px;
+}
+
+.navlink {
+  text-decoration: none;
+  color: grey;
+  font-size: larger;
+  font-weight: 400;
+  padding-top: 8px;
+  padding-bottom: 3px;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  margin: 16px 0px 0px 4px;
+}
+
+.navlink:hover {
+  /* 更现代的悬停效果 */
+  background-color: rgba(53, 182, 221, 0.15);
+
+  transform: translateY(-1.5px);
+}
+
+.navlink.active {
+  color: #3a65c8;
+}
