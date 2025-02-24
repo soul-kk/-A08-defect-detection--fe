@@ -1,15 +1,16 @@
 import Header from "./header";
 import '../style/detection.css'
-import { Image } from 'antd'
+import { Image, message } from 'antd'
 import { UploadOutlined, ZoomInOutlined } from '@ant-design/icons';
 import { Button, Upload } from 'antd';
-import exampleImage1 from '../images/0a2c9f2e5.jpg'
-import exampleImage2 from '../images/0a2dbbb6f.jpg'
-import exampleImage3 from '../images/0a3962685.jpg'
-import exampleImage4 from '../images/0a63f7765.jpg'
-import exampleImage5 from '../images/0a9cbb927.jpg'
-import exampleImage6 from '../images/0e2adcd02.jpg'
-
+import exampleImage1 from '../images/jzw.jpg'
+import exampleImage2 from '../images/bd.jpg'
+import exampleImage3 from '../images/hh.jpg'
+import exampleImage4 from '../images/qt1.jpg'
+import exampleImage5 from '../images/qt2.jpg'
+import exampleImage6 from '../images/qt3.jpg'
+import { useEffect, useState } from "react";
+import { detectImage, getImage } from "../api";
 
 export default function Detection() {
     return <div className="indexContainer">
@@ -52,13 +53,46 @@ function Example() {
 }
 
 function Main() {
+    const [fileId, setFileId] = useState(null);
+    const [result, setResult] = useState(['no result']);
+
+    function handleUpload(info) {
+        if (info.file.status === 'done') {       //请求成功
+            const { response } = info.file;
+            if (response.code === 200) {         //请求返回正常
+                setFileId(response.data.fileId);
+                message.success('图片上传成功！');
+            } else {
+                message.error(response.message || '上传失败');
+            }
+        } else if (info.file.status === 'error') {      //请求失败
+            message.error('上传失败');
+        }
+    }
+
+    async function handleDetect() {
+        try {
+            const response = await detectImage(fileId);
+            if (response && response.data) {
+                setResult(response.data.results);
+                message.success('检测成功！');
+            }
+        } catch (error) {
+            message.error('检测失败');
+            console.log(error);
+        }
+    }
+
+    console.log('fileId:', fileId);
+    console.log('检测结果:', result);
     return (
         <div className="main">
-            <h2>模型检测</h2>
+            <h2>缺陷检测</h2>
             <div className="upload">
                 <Upload
-                    action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
+                    action="http://localhost:8080/api/upload"
                     listType="picture"
+                    onChange={handleUpload}
                 >
                     <Button type="primary" icon={<UploadOutlined />}>
                         上传图片
@@ -67,29 +101,56 @@ function Main() {
             </div>
 
             <div className="resultContainer">
-                <Button type="primary" icon={<ZoomInOutlined />}>
+                <Button type="primary" icon={<ZoomInOutlined />} onClick={handleDetect} >
                     检测缺陷
                 </Button>
-                <Result />
+                <Result id={fileId} result={result} />
             </div>
         </div>
     );
 }
 
-function Result() {
+function Result({ id, result }) {
+    const [imageUrl, setImageUrl] = useState(null);
+    useEffect(()=>{
+        return ()=>{
+            if(imageUrl) {
+                URL.revokeObjectURL(imageUrl);
+            }
+        };
+    },[id]);
+
+    const label = result.map((result) => {
+        return <p>--{result.label}--</p>
+    });
+    const confidence = result.map((result) => {
+        return <p>--{result.confidence}--</p>
+    });
+
+    async function handleGetImage() {
+        try {
+            const url = await getImage(id);
+            setImageUrl(url);
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    console.log('imageUrl:',imageUrl);
+
     return (
         <div className="result">
             <div className="label">
                 <h3>缺陷类型：</h3>
-                <p>--划痕--</p>
+                <p>{label}</p>
             </div>
             <div className="confidence">
-                <h3>自信度：</h3>
-                <p>--0.89--</p>
+                <h3>分别对应自信度：</h3>
+                <p>{confidence}</p>
             </div>
             <div className="photo">
-                <Button>查看结果图</Button>
-                <Image src={exampleImage1} />
+                <Button onClick={handleGetImage}>查看结果图</Button>
+                <img src={imageUrl} />
             </div>
         </div>
     );

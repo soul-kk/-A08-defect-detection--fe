@@ -105,6 +105,10 @@
   margin-top: 20px;
 }
 
+.photo img {
+  max-width: 100%;
+}
+
 .photo Button {
   color: #3a65c8;
   border: #5078d5 1px solid;
