@@ -3,51 +3,18 @@ import '../style/detection.css'
 import { Image, message } from 'antd'
 import { UploadOutlined, ZoomInOutlined } from '@ant-design/icons';
 import { Button, Upload } from 'antd';
-import exampleImage1 from '../images/jzw.jpg'
-import exampleImage2 from '../images/bd.jpg'
-import exampleImage3 from '../images/hh.jpg'
-import exampleImage4 from '../images/qt1.jpg'
-import exampleImage5 from '../images/qt2.jpg'
-import exampleImage6 from '../images/qt3.jpg'
 import { useEffect, useState } from "react";
-import { detectImage, getImage } from "../api";
+import { detectImage, getInitialImage } from "../api";
+
 
 export default function Detection() {
-    return <div className="indexContainer">
-        <Header />
-        <Descriprion />
-        <div className="mainContainer">
-            <Example />
-            <Main />
-        </div>
-    </div>
-}
-
-function Descriprion() {
     return (
-        <div className="description">
-            <h3>项目背景</h3>
-            <p>传统的零部件缺陷检测方法多依赖人工检查，效率低、错误率高，难以满足现代生产的高效性和准确性要求。需要引入智能先进的检测技术，提升零部件的检测效率和准确性。该系统旨在彻底改变传统的车辆零部件质量检测流程，通过引入智能图像识别技术，实时、自动化的检测和分类，显著提升生产效率和产品质量。</p>
-        </div>
-    );
-}
+        <div className="indexContainer">
+            <Header />
+            <div className="mainContainer">
+                <Main />
+            </div>
 
-function Example() {
-    return (
-        <div className="example">
-            <h2>缺陷样例展示</h2>
-            <Image.PreviewGroup preview={{ onChange: (current, prev) => console.log(`current index: ${current}, prev index: ${prev}`), }}>
-                <p>-- 夹杂物</p>
-                <Image className="exampleImage" src={exampleImage1} />
-                <p>-- 补丁</p>
-                <Image className="exampleImage" src={exampleImage2} />
-                <p>-- 划痕</p>
-                <Image className="exampleImage" src={exampleImage3} />
-                <p>-- 其他缺陷</p>
-                <Image className="exampleImage" src={exampleImage4} />
-                <Image className="exampleImage" src={exampleImage5} />
-                <Image className="exampleImage" src={exampleImage6} />
-            </Image.PreviewGroup>
         </div>
     );
 }
@@ -111,46 +78,50 @@ function Main() {
 }
 
 function Result({ id, result }) {
-    const [imageUrl, setImageUrl] = useState(null);
-    useEffect(()=>{
-        return ()=>{
-            if(imageUrl) {
-                URL.revokeObjectURL(imageUrl);
+    const [initialImageUrl, setInitialImageUrl] = useState(null);
+
+    useEffect(() => {
+        return () => {
+            if (initialImageUrl) {
+                URL.revokeObjectURL(initialImageUrl);
             }
         };
-    },[id]);
+    }, [id]);
 
-    const label = result.map((result) => {
-        return <p>--{result.label}--</p>
+    const label = result.map((result, index) => {
+        return <p key={`label--${index}`}>--{result.label}--</p>
     });
-    const confidence = result.map((result) => {
-        return <p>--{result.confidence}--</p>
+    const confidence = result.map((result, index) => {
+        return <p key={`label--${index}`}>--{result.confidence}--</p>
     });
 
-    async function handleGetImage() {
+    async function handleGetInitialImage() {
         try {
-            const url = await getImage(id);
-            setImageUrl(url);
+            const initialUrl = await getInitialImage(id);
+            setInitialImageUrl(initialUrl);
         } catch (err) {
             console.log(err);
         }
     }
 
-    console.log('imageUrl:',imageUrl);
+    console.log('InitialImageUrl:', initialImageUrl);
 
     return (
         <div className="result">
             <div className="label">
                 <h3>缺陷类型：</h3>
-                <p>{label}</p>
+                {label}
             </div>
             <div className="confidence">
                 <h3>分别对应自信度：</h3>
-                <p>{confidence}</p>
+                {confidence}
             </div>
             <div className="photo">
-                <Button onClick={handleGetImage}>查看结果图</Button>
-                <img src={imageUrl} />
+                <Button onClick={handleGetInitialImage}>图片结果展示</Button>
+                <h3>原图：</h3>
+                <img src={initialImageUrl} />
+                <h3>结果图：</h3>
+                <img src={initialImageUrl} />           {/* TODO */}
             </div>
         </div>
     );

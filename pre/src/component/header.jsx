@@ -8,8 +8,11 @@ export default function Header() {
             <AlertTwoTone className="titleIcon" />
             <h3 className="title">车辆零部件缺陷检测系统</h3>
             <nav>
+                <NavLink to='/' className={({ isActive }) => isActive ? 'navlink active' : 'navlink'}>首页</NavLink>
+
                 <EyeTwoTone className="routeIcon" />
-                <NavLink to='/' className={({ isActive }) => isActive ? 'navlink active' : 'navlink'}>检测识别</NavLink>
+                <NavLink to='/detection' className={({ isActive }) => isActive ? 'navlink active' : 'navlink'}>缺陷检测</NavLink>
+
                 <PieChartTwoTone className="routeIcon" />
                 <NavLink to='/statistics' className={({ isActive }) => isActive ? 'navlink active' : 'navlink'}>数据统计</NavLink>
             </nav>

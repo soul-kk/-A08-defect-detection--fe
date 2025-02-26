@@ -48,6 +48,8 @@ nav {
 }
 
 .navlink {
+  text-align: center;
+  min-width: 80px;
   text-decoration: none;
   color: grey;
   font-size: larger;

@@ -1,0 +1,60 @@
+.indexContainer {
+  position: relative;
+}
+
+.description {
+  height: 110px;
+  width: 850px;
+  margin-top: 25px;
+  margin-left: 100px;
+  left: 120px;
+  top: 80px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 1px 1px 10px gray;
+}
+
+.description p {
+  color: rgb(87, 88, 88);
+  padding: 10px 20px 15px 20px;
+}
+
+.description h3 {
+  border-start-start-radius: 10px;
+  border-start-end-radius: 10px;
+  color: #3a65c8;
+  background-color: rgba(71, 183, 217, 0.511);
+}
+
+.mainContainer {
+  display: flex;
+  justify-content: flex-start;
+  gap: 70px;
+  margin: 20px 50px;
+}
+
+.example {
+  background-color: white;
+  box-shadow: 1px 1px 10px gray;
+  border-radius: 10px;
+  height: 630px;
+  width: 400px;
+  margin: 0;
+}
+
+.exampleImage {
+  padding: 6px;
+}
+
+.example h2 {
+  border-start-start-radius: 10px;
+  border-start-end-radius: 10px;
+  color: #3a65c8;
+  background-color: rgba(71, 183, 217, 0.511);
+}
+
+.example p {
+  margin-top: 6px;
+  color: rgb(15, 43, 83);
+}
+

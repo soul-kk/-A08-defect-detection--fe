@@ -15,7 +15,7 @@ export const detectImage = async (id) => {
 }
 
 //获取标注后的图片      返回图片的Blob url
-export const getImage = async (id) => {
+export const getInitialImage = async (id) => {
     try {
         const response = await fetch(`${baseApi}/api/detect/image/${id}`);
         if (!response.ok) {
