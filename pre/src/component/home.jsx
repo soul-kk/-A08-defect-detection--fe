@@ -1,12 +1,13 @@
 import Header from "./header";
 import '../style/home.css'
 import { Image, message } from 'antd'
-import exampleImage1 from '../images/jzw.jpg'
-import exampleImage2 from '../images/bd.jpg'
-import exampleImage3 from '../images/hh.jpg'
-import exampleImage4 from '../images/qt1.jpg'
-import exampleImage5 from '../images/qt2.jpg'
-import exampleImage6 from '../images/qt3.jpg'
+import exampleImage1 from '/images/exampleShow/jzw.jpg'
+import exampleImage2 from '/images/exampleShow/bd.jpg'
+import exampleImage3 from '/images/exampleShow/hh.jpg'
+import exampleImage4 from '/images/exampleShow/qt1.jpg'
+import exampleImage5 from '/images/exampleShow/qt2.jpg'
+import exampleImage6 from '/images/exampleShow/qt3.jpg'
+import exampleImage7 from '/images/resultShow/display.jpg'
 
 
 export default function Home() {
@@ -15,6 +16,7 @@ export default function Home() {
         <Descriprion />
         <div className="mainContainer">
             <Example />
+            <ResultShow />
         </div>
     </div>
 }
@@ -48,3 +50,22 @@ function Example() {
     );
 }
 
+function ResultShow() {
+    return (
+        <div className="resultShow">
+            <h2>检测结果展示</h2>
+            <Image.PreviewGroup preview={{ onChange: (current, prev) => console.log(`current index: ${current}, prev index: ${prev}`), }}>
+                <p>-- 夹杂物</p>
+                <Image className="exampleImage" src={exampleImage7} />
+                <p>-- 补丁</p>
+                <Image className="exampleImage" src={exampleImage7} />
+                <p>-- 划痕</p>
+                <Image className="exampleImage" src={exampleImage7} />
+                <p>-- 其他缺陷</p>
+                <Image className="exampleImage" src={exampleImage7} />
+                <Image className="exampleImage" src={exampleImage7} />
+                <Image className="exampleImage" src={exampleImage7} />
+            </Image.PreviewGroup>
+        </div>
+    );
+}

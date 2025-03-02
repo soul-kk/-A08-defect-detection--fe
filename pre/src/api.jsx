@@ -1,4 +1,5 @@
 const baseApi = 'http://localhost:8080'
+const mockApi = 'http://127.0.0.1:4523/m1/5885910-5572598-default/api/history'
 
 //检测图片
 export const detectImage = async (id) => {
@@ -14,7 +15,7 @@ export const detectImage = async (id) => {
     }
 }
 
-//获取标注后的图片      返回图片的Blob url
+//获取原图片      返回图片的Blob url
 export const getInitialImage = async (id) => {
     try {
         const response = await fetch(`${baseApi}/api/detect/image/${id}`);
@@ -26,5 +27,19 @@ export const getInitialImage = async (id) => {
         return imageUrl;
     } catch (err) {
         console.log(err);
+    }
+}
+
+//获取图库
+export const getStorage = async () => {
+    try {
+        const response = await fetch(`${mockApi}`);
+        if (!response.ok) {
+            throw new Error(`http error:${response.status}`);
+        }
+        const data = await response.json();
+        return data;
+    } catch (err) {
+        console.log(`获取图库数据失败:${err}`);
     }
 }
