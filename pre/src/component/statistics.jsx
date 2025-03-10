@@ -1,18 +1,16 @@
-import Header from "./header";
+import Header from "./header"
+import ChatBot from "./chatbot";
+import styles from '../style/statistics.module.css';
 
-export default function Statistics () {
+
+export default function Statistics() {
     return (
-        <div className="indexContainer">
+        <div className={styles.indexContainer}>
             <Header />
-            <div className="mainContainer">
+            <div className={styles.mainContainer}>
                 <ChatBot />
             </div>
         </div>
     );
 }
 
-function ChatBot() {
-    return (
-        
-    );
-}

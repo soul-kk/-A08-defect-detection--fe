@@ -7,7 +7,7 @@ import exampleImage3 from '/images/exampleShow/hh.jpg'
 import exampleImage4 from '/images/exampleShow/qt1.jpg'
 import exampleImage5 from '/images/exampleShow/qt2.jpg'
 import exampleImage6 from '/images/exampleShow/qt3.jpg'
-import exampleImage7 from '/images/resultShow/display.jpg'
+import exampleImage7 from '/images/exampleShow/qt3.jpg'
 
 
 export default function Home() {
