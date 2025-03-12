@@ -1,5 +1,8 @@
 const baseApi = 'http://localhost:8080'
 const mockApi = 'http://127.0.0.1:4523/m1/5885910-5572598-default/api/history'
+//讯飞星火api
+const API_URL = 'https://spark-api-open.xf-yun.com/v1/chat/completions'
+const API_KEY = 'gSStxqxITAvspBtktFAF:XPnGxzpxprfLmuBfYsAF'
 
 //检测图片
 export const detectImage = async (id) => {
@@ -43,3 +46,4 @@ export const getStorage = async () => {
         console.log(`获取图库数据失败:${err}`);
     }
 }
+
