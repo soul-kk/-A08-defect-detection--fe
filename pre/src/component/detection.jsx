@@ -1,7 +1,7 @@
 import Header from "./header";
 import '../style/detection.css'
 import { UploadOutlined, ZoomInOutlined, FolderOpenFilled,TagTwoTone } from '@ant-design/icons';
-import { Button, Upload, Spin, Modal } from 'antd';
+import { Button, Upload, Spin, Modal, message } from 'antd';
 import { useEffect, useState } from "react";
 import { detectImage, getInitialImage, getStorage } from "../api";
 import { useQuery } from "@tanstack/react-query";
@@ -56,7 +56,7 @@ function Main() {
             <h2>缺陷检测</h2>
             <div className="upload">
                 <Upload
-                    action="http://localhost:8080/api/upload"
+                    action="https://amazed-obviously-bluejay.ngrok-free.app/api/upload"
                     listType="picture"
                     onChange={handleUpload}
                 >

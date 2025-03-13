@@ -1,19 +1,55 @@
 .mainContainer {
-  display: flex;
-  align-items: center;
-  justify-self: center;
+
   min-height: 100vh;
 }
 
+.chatbotToggle {
+  position: fixed;
+  bottom: 30px;
+  right: 35px;
+  border: none;
+  height: 50px;
+  width: 50px;
+  cursor: pointer;
+  border-radius: 50%;
+  background: #3d7bff ;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chatbotToggle svg {
+  color: #fff;
+  position: absolute;
+  transition: opacity 0.3s ease;
+}
+
+.chatbotToggle svg.hide {
+  opacity: 0;
+}
+
 .chatbotPopup {
-  position: relative;
+  position: fixed;
+  right: 47px;
+  bottom: 85px;
   width: 420px;
   background-color: #fff;
   overflow: hidden;
   border-radius: 15px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
   box-shadow: 0 0 128px 0 rgba(0, 0, 0, 0.1),
     0 32px 64px -48px rgba(0, 0, 0, 0.5);
 }
+
+.chatbotPopup.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
 
 .chatHeader {
   display: flex;
