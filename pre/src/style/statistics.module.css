@@ -16,8 +16,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: transform 0.2s ease;
 }
-
+.chatbotToggle:hover {
+  transform: scale(1.12);
+}
 .chatbotToggle svg {
   color: #fff;
   position: absolute;

@@ -66,6 +66,8 @@
   border-radius: 10px;
   width: 600px;
   margin: 0;
+  height: 800px;
+  overflow: auto;
 }
 
 .itemList {

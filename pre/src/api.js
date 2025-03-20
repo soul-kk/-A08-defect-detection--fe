@@ -4,8 +4,7 @@ const localApi = "http://localhost:8080";
 
 // 通用请求头配置
 const headers = {
-  "Content-Type": "application/json",
-  'Accept': "application/json",
+
 };
 
 //检测图片
@@ -27,6 +26,7 @@ export const getInitialImage = async (id) => {
   try {
     const response = await fetch(`${baseApi}/api/get_initial_image/${id}`, {
       headers,
+      mode: 'cors',  // 显式设置 CORS 模式
     });
     if (!response.ok) {
       throw new Error(`http error:${response.status}`);
@@ -42,7 +42,9 @@ export const getInitialImage = async (id) => {
 //获取图库
 export const getStorage = async () => {
   try {
-    const response = await fetch(`${baseApi}/api/history`, { headers });
+    const response = await fetch(`${baseApi}/api/history`, { headers,
+      mode: 'cors',  // 显式设置 CORS 模式
+     });
     if (!response.ok) {
       throw new Error(`http error:${response.status}`);
     }
