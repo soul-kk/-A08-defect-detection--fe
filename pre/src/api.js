@@ -22,22 +22,22 @@ export const detectImage = async (id) => {
 };
 
 //获取原图片      返回图片的Blob url
-export const getInitialImage = async (id) => {
-  try {
-    const response = await fetch(`${baseApi}/api/get_initial_image/${id}`, {
-      headers,
-      mode: 'cors',  // 显式设置 CORS 模式
-    });
-    if (!response.ok) {
-      throw new Error(`http error:${response.status}`);
-    }
-    const imageBlob = await response.blob();
-    const imageUrl = URL.createObjectURL(imageBlob);
-    return imageUrl;
-  } catch (err) {
-    console.log(err);
-  }
-};
+// export const getInitialImage = async (id) => {
+//   try {
+//     const response = await fetch(`${baseApi}/api/get_initial_image/${id}`, {
+//       headers,
+//       mode: 'cors',  // 显式设置 CORS 模式
+//     });
+//     if (!response.ok) {
+//       throw new Error(`http error:${response.status}`);
+//     }
+//     const imageBlob = await response.blob();
+//     const imageUrl = URL.createObjectURL(imageBlob);
+//     return imageUrl;
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };
 
 //获取图库
 export const getStorage = async () => {

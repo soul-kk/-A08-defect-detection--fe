@@ -3,7 +3,7 @@ import '../style/detection.css'
 import { UploadOutlined, ZoomInOutlined, FolderOpenFilled,TagTwoTone } from '@ant-design/icons';
 import { Button, Upload, Spin, Modal, message } from 'antd';
 import { useEffect, useState } from "react";
-import { detectImage, getInitialImage, getStorage } from "../api";
+import { detectImage, getStorage } from "../api";
 import { useQuery } from "@tanstack/react-query";
 
 export default function Detection() {
@@ -22,12 +22,23 @@ export default function Detection() {
 function Main() {
     const [fileId, setFileId] = useState(null);
     const [result, setResult] = useState(['not detect yet']);
+    const [images, setImages] = useState({
+        initial_image: null,
+        heatMap: null,
+        result_image: null
+    })
 
     function handleUpload(info) {
         if (info.file.status === 'done') {       //请求成功
             const { response } = info.file;
+            console.log(`上传图片后的响应: ${response.data}`)
             if (response.code === 200) {         //请求返回正常
-                setFileId(response.data.fileId);
+                setFileId(response.data.id);
+                setImages({
+                    initial_image: response.data.initial_image,
+                    heatMap: response.data.heatmap,
+                    result_image: response.data.result_image
+                });
                 message.success('图片上传成功！');
             } else {
                 message.error(response.message || '上传失败');
@@ -70,40 +81,22 @@ function Main() {
                 <Button type="primary" icon={<ZoomInOutlined />} onClick={handleDetect} >
                     检测缺陷
                 </Button>
-                <Result id={fileId} result={result} />
+                <Result id={fileId} result={result} images={images} />
             </div>
         </div>
     );
 }
 
-function Result({ id, result }) {
-    const [initialImageUrl, setInitialImageUrl] = useState(null);
+function Result({ id, result, images }) {
+    const [imagesIsShow,setImagesIsShow] = useState(false)
 
-    useEffect(() => {
-        return () => {
-            if (initialImageUrl) {
-                URL.revokeObjectURL(initialImageUrl);
-            }
-        };
-    }, [id]);
-
+    console.log(images.heatMap)
     const label = result.map((result, index) => {
         return <p key={`label--${index}`}>--{result.label}--</p>
     });
     const confidence = result.map((result, index) => {
         return <p key={`label--${index}`}>--{result.confidence}--</p>
     });
-
-    async function handleGetInitialImage() {
-        try {
-            const initialUrl = await getInitialImage(id);
-            setInitialImageUrl(initialUrl);
-        } catch (err) {
-            console.log(err);
-        }
-    }
-
-    console.log('InitialImageUrl:', initialImageUrl);
 
     return (
         <div className="result">
@@ -116,13 +109,13 @@ function Result({ id, result }) {
                 {confidence}
             </div>
             <div className="photo">
-                <Button onClick={handleGetInitialImage}>图片结果展示</Button>       {/**修改为handle获取三种图片 */}
+                <Button onClick={() => setImagesIsShow(true)}>图片结果展示</Button>  
                 <h3>原图：</h3>
-                <img src={initialImageUrl} />
+                <img src={ imagesIsShow? images.initial_image : null} />
                 <h3>结果图：</h3>
-                <img src={initialImageUrl} />           {/* TODO */}
+                <img src={ imagesIsShow? images.result_image : null} />        
                 <h3>热力图：</h3>
-                <img src={initialImageUrl} />
+                <img src={imagesIsShow? images.heatMap : null} />
             </div>
         </div>
     );
