@@ -4,7 +4,7 @@
   position: relative;
   background-color: rgba(53, 182, 221, 0.511);
   box-shadow: 0px 4px 5px hsla(210, 75%, 51%, 0.397);
-  height: 59px;
+  height: 79px;
 }
 
 .title {
@@ -15,7 +15,6 @@
   top: 11px;
   border-radius: 10px;
   padding: 5px 10px 5px 10px;
-
   font-family: "思源黑体", "Source Han Sans CN", "Noto Sans SC", sans-serif;
   font-weight: 500;
   letter-spacing: 0.1em;
@@ -24,6 +23,14 @@
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+
+h6 {
+  font-style: italic;
+  color: #666;
+  font-weight: normal;
+  font-size: 14px;
+  margin-top: 5px;
 }
 
 .titleIcon {
@@ -35,7 +42,8 @@
 
 nav {
   position: absolute;
-  left: 500px;
+  left: 630px;
+  top: 7px;
   width: 300px;
   display: flex;
   justify-content: center;

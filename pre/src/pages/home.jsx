@@ -1,4 +1,4 @@
-import Header from "./header";
+import Header from "../component/header";
 import '../style/home.css'
 import { Image, message } from 'antd'
 

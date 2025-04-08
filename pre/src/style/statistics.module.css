@@ -1,6 +1,65 @@
 .mainContainer {
+  min-height: calc(100vh - 64px);
+  background-color: #f5f7ff;
+}
 
-  min-height: 100vh;
+/* Charts 组件样式 */
+.chatsContainer {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px;
+  background-color: #f5f7ff;
+  min-height: calc(100vh - 64px); /* 减去header高度 */
+}
+
+.pieChartContainer,
+.barChartContainer {
+  flex: 1;
+  max-width: 600px;
+  background-color: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  display: flex;           /* 新增 */
+  flex-direction: column;  /* 新增 */
+  align-items: center;     /* 新增 - 水平居中 */
+  text-align: center;      /* 新增 - 文本居中 */
+}
+
+.pieChartContainer p {
+  margin-top: 20px;
+  color: #666;
+  line-height: 1.6;
+  text-align: justify;     /* 新增 - 描述文本两端对齐 */
+  padding: 0 16px;         /* 新增 - 添加左右内边距 */
+}
+
+.pieChartContainer h2,
+.barChartContainer h2 {
+  margin: 0 0 20px 0;
+  color: #333;
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: center;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #eaeaea;
+}
+
+/* 响应式布局 */
+@media (max-width: 1200px) {
+  .chatsContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .pieChartContainer,
+  .barChartContainer {
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 20px;
+  }
 }
 
 .chatbotToggle {

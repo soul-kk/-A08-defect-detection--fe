@@ -1,4 +1,4 @@
-import Header from "./header";
+import Header from "../component/header";
 import '../style/detection.css'
 import { UploadOutlined, ZoomInOutlined, FolderOpenFilled,TagTwoTone } from '@ant-design/icons';
 import { Button, Upload, Spin, Modal, message } from 'antd';
