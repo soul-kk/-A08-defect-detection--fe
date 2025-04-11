@@ -1,11 +1,4 @@
 const baseApi = "https://amazed-obviously-bluejay.ngrok-free.app";
-// const mockApi = "http://127.0.0.1:4523/m1/5885910-5572598-default/api/history"; //获取图库的mock
-// const localApi = "http://localhost:8080";
-
-// 通用请求头配置
-const headers = {
-
-};
 
 //检测图片
 export const detectImage = async (id) => {
